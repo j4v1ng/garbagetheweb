@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+<h:head>
+  <title>www.trashcat.net</title>
+ <script type="text/javascript">
+   PrimeFaces.widget.Uploader.prototype._createPostParams = function() {
+   var b = {};
+   b[PrimeFaces.PARTIAL_REQUEST_PARAM] = true;
+   b[PrimeFaces.PARTIAL_PROCESS_PARAM] = this.id;
+   b[PrimeFaces.PARTIAL_SOURCE_PARAM] = this.id;
+   b[PrimeFaces.VIEW_STATE] = PrimeFaces.ajax.AjaxUtils.encodeViewState();
+   if (this.cfg.update) {
+      b[PrimeFaces.PARTIAL_UPDATE_PARAM] = this.cfg.update
+   }
+   var a = PrimeFaces.getCookie("JSESSIONID");
+   if (this.cfg.script.indexOf("jsessionid") == -1) {
+      paramIndex = this.cfg.script.indexOf('?');
+      if (paramIndex != -1) {
+         this.cfg.script = this.cfg.script.substring(0, paramIndex)
+               + ";jsessionid=" + a
+               + this.cfg.script.substring(paramIndex);
+      } else {
+         this.cfg.script = this.cfg.script + ";jsessionid=" + a;
+      }
+   }
+   b['cid'] = "#{javax.enterprise.context.conversation.id}";
+   return b;
+};
+PrimeFaces.widget.Uploader.prototype.createPostParams = PrimeFaces.widget.Uploader.prototype._createPostParams;
+</script>
+<script type="text/javascript" src="/primefaces_resource/2.1/yui/utilities/utilities.js"></script>
+<script type="text/javascript" src="/primefaces_resource/2.1/yui/datasource/datasource-min.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/primefaces/paginator/paginator.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/yui/datatable/datatable-min.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/primefaces/datatable/datatable.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/yui/swf/swf-min.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/yui/charts/charts-min.js"></script> 
+<script type="text/javascript" src="/primefaces_resource/2.1/primefaces/charts/charts.js"></script>
+<script type="text/javascript" src="/primefaces_resource/2.1/jquery/jquery.js"></script>
+<script type="text/javascript" src="/primefaces_resource/2.1/primefaces/core/core.js"></script>
+  </h:head>
+<!-- THE TEMPLATE REPRESENTS THE LOGICAL DISPOSITION OF THE ELEMENTS, LOOK AND FEEL -->
+<body>
+	
+	<p:dock position="top">  
+    <p:menuitem value="Home" icon="/images/home.png" url="home.xhtml" alt="The image could not be found."/>
+	<p:menuitem value="Register" icon="/images/register.png" url="registration.xhtml" alt="The image could not be found."/> 
+	<p:menuitem value="Throw garbage" icon="/images/throw.png" url="upload.xhtml" alt="The image could not be found."/>
+    <p:menuitem value="Find garbage" icon="/images/trashcat.png" url="results.xhtml" alt="The image could not be found."/>  
+    <p:menuitem value="F.A.Q" icon="/images/faq.png" url="faq.xhtml"/>      
+	</p:dock>  
+	<!-- ALL ELEMENTS THAT CAN BE POTENTIALLY DISPLAYED SHOULD BE INSERTED IN THE TEMPLATE -->
+	
+	<ui:insert name="registrationForm"/>
+	<ui:insert name="uploadForm"/>
+	<ui:insert name="resultsForm"/>
+	<ui:insert name="resultsForm2"/>
+	<ui:insert name="homeForm"/>
+	<ui:insert name="faqForm"/>
+	
+	<h6>Copyright 2011 all rights reserved</h6>
+	    
+
+</body>
+
+</html>
